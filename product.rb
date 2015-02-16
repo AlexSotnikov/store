@@ -26,16 +26,16 @@ class Product
 		s << '</body> </html>'         
   end
   def self.find(names)
-    for el in(@@products) 
+    @finds=nil
+    @@products.each do |el|
       if el.name.downcase==names.downcase
-        find=el
+        @finds=el
+      end
+      if @finds.nil?
+        @finds=names
       end
     end
-    if find==nil
-      find=names
-    else
-      find
-    end
+     @finds
   end
   def to_html
     s='<html> <head> <title> My Store </title> </head> <body bgcolor="yellow"> <br />'
@@ -62,6 +62,3 @@ class MyStore
      end     
   end	
 end
-
-
-

@@ -26,16 +26,16 @@ class Product
 		s << '</body> </html>'         
   end
   def self.find(names)
-    for el in(@@products) 
+    @finds=nil
+    @@products.each do |el|
       if el.name.downcase==names.downcase
-        find=el
+        @finds=el
+      end
+      if @finds.nil?
+        @finds=names
       end
     end
-    if find==nil
-      find=names
-    else
-      find
-    end
+     @finds
   end
   def to_html
     s='<html> <head> <title> My Store </title> </head> <body bgcolor="yellow"> <br />'
@@ -62,6 +62,9 @@ class MyStore
      end     
   end	
 end
+Product.new("Lenovo", 6500, 5.5, "Android 4.3", 16, 13, "http://i.allo.ua/media/catalog/product/cache/1/image/240x170/9df78eab33525d08d6e5fb8d27136e95/v/i/vibe_z_product_tour_01.jpg").save
+Product.new("Samsung",3500, 5.25, "Android 4.2", 8, 8, "http://i.allo.ua/media/catalog/product/cache/1/image/240x170/9df78eab33525d08d6e5fb8d27136e95/1/5/1544584.jpg").save
+p Product.find("lenovo")
 
 
 
