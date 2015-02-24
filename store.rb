@@ -12,7 +12,7 @@ class MyStore
        if a
          [200,{'Content-Type' => 'text/html'},[a.to_html]]
        else       
-       [200,{'Content-Type' => 'text/html'},[layout{'Item not found'}]]
+       [404,{'Content-Type' => 'text/html'},[layout{'Item not found'}]]
        end    
      end    
   end	
