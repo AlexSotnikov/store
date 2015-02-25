@@ -29,15 +29,24 @@ class Product
     layout do
       s='<b> '+@name.to_s+'</b> <br /><i> Price: '+@price.to_s
       s <<'</i><br/> <img src='+@img.to_s+'><br/><i> Info: '+@info.to_s+'</i><br/>'
+       s << '<form method="POST" action="/cart">
+             <button type="submit">add to cart</button>
+             <input name="name" value="'+@name.to_s+'" type="hidden">
+             <input name="price" value="'+@price.to_s+'" type="hidden"></form><br/>'
     end		       
   end
-  def self.to_html
-    s="<table> "
+  def self.to_html(st=' ')
+    s=st.to_s+"<table> "
     @@products.each do |e| 
       s << '<td align="center"><br/><b>'+e.name.to_s+'</b> <br/> <i> price: '+e.price.to_s+'</i> <br/>'
-      s << '<a href="http://localhost:9292/'+e.name.to_s.downcase+'"> <img src='+e.img.to_s+'></a></td><br/>'
+      s << '<a href="http://localhost:9292/'+e.name.to_s.downcase+'"> <img src='+e.img.to_s+'></a><br/>'
+      s << '<form method="POST" action="/cart">
+             <button type="submit">add to cart</button>
+             <input name="name" value="'+e.name.to_s+'" type="hidden">
+             <input name="price" value="'+e.price.to_s+'" type="hidden"></form></td><br/>'
     end
     s << '</table>'
+    
       layout do 
         s
       end

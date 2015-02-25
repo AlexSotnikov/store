@@ -4,6 +4,7 @@ def layout(&block)
    content << '<link rel="stylesheet" type="text/css" href="public/style.css">'
    content << '</head><br/><body ><div align="center">'
    content << yield
+   content << '<a href="http://localhost:9292/cart">Go to Cart</a></div></body> </html>'
    content << '<a href="http://localhost:9292/">Go to Home</a> </div></body> </html>'
 end
 end
