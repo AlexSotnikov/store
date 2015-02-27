@@ -1,8 +1,0 @@
-require_relative 'spec_helper'
-require_relative '../store'
-describe MyStore do
-  it 'call' do
-    MyStore.new.call().should eq(is_a?(Array))
-  end
-end
-  

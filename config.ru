@@ -3,7 +3,7 @@ require_relative 'midleware/res_midleware.rb'
 require_relative 'midleware/static_midleware.rb'
 require_relative 'midleware/session_midleware.rb'
 use Rack::Reloader, 0 
-use Res
+#use Res
 use Static
 use Session
 Product.new("Lenovo", 6500,"public/11.jpg", "Android 4.2 memory 8gb  camera 8mpx").save
