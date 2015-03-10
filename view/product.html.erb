@@ -1,0 +1,11 @@
+  <table>
+<% @products.each do |e| %>
+      <td align="center"><br/><b><%= e.name.to_s %></b> <br/> <i> price: <%= e.price.to_s%></i> <br/>
+      <a href="/<%=e.name.to_s.downcase%>"> <img src="<%=e.img.to_s%>"></a><br/>
+      <form method="POST" exception="/">
+             <button type="submit">add to cart</button>
+             <input name="name" value="<%= e.name.to_s%>" type="hidden">
+             <input name="price" value="<%= e.price.to_s%>" type="hidden"></form></td><br/>
+<% end %>
+  </table>
+<a href="/cart">Go to Cart</a></div></body> </html>

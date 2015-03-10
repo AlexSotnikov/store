@@ -1,0 +1,16 @@
+<% if @prod!='' %>
+  <% @prod.each do |e| %>
+    <% el=e.split('=') %>
+    <b><%= el[0].to_s %></b><i> price: <%= el[1].to_s %></i> <br/>
+  <% end %>
+   <%=Cart.sub_total(@prod).to_s %><br/>
+      
+      <form method="POST" action="/order">
+      <input name="order" type="text">Your name<br/>
+      <input name="adres" type="text">Your adress<br/>
+      <input name="sub" value="<%=Cart.sub_total(@prod).to_s %>" type="hidden">
+      <input type="submit"></form>   
+     
+<% else %>
+   Cart is emty
+<% end %>

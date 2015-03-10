@@ -1,0 +1,9 @@
+<% if @prod %>
+    <% @prod.each do |e| %>
+    <b><%= e.to_s %></b><i>
+       <% end %>
+  SUB TOTAL= <%= Order.sub_all %>
+<% else %>
+      <%= @text %>
+  <% end %>
+

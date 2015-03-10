@@ -16,13 +16,4 @@ describe Product do
     product.should eq(Product.find("lenovo"))
     Product.find("xxx").should eq(nil)
   end
-  it "product to_html" do
-    product.to_html.is_a?(String).should eq(true)
-  end
-  it "all product to_html" do
-    product.save
-    Product.new("lg", 6500, "http","android 4.2, dispay 5").save
-    Product.to_html.is_a?(String).should eq(true)
-  end
-  
 end

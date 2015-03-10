@@ -3,7 +3,6 @@ class Static
     @nextapp=nextapp
   end
   def call(env)
-    c,h,b=@nextapp.call(env) 
     r=Rack::Request.new(env)
     adr=r.path 
     case r.path.split('.').last
@@ -16,7 +15,7 @@ class Static
           [200,{'Content-Type'=>'image/jpeg'},File.open(adr[1,adr.length])]
         end
       else
-        [c,h,b]
+        @nextapp.call(env)
     end
   end  
 end  

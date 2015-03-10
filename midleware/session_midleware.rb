@@ -4,33 +4,35 @@ class Session
   def initialize(nextapp)
     @nextapp = nextapp
   end
-  def call(env)  
-    r=Rack::Request.new(env)  
-    token=env['HTTP_COOKIE'] #проверка токена
-      if token==nil          #если пусто генерируем
-        token = generate_token
-        @@session[token] = {}
-      else
-        token=token.split('=').last  #отделил токен от "id="
-      end  
-    env['Set']=token #хеш для установки куки в Store
-    unless @@session[token] #запись в сессию
-      @@session[token]={'count visit' => 1,'last visit'=>Time.now}
-    else
-      if r.path=='/'
-        unless @@session[token]['count visit']
-          @@session[token]={'count visit' => 1,'last visit'=>Time.now}
-        else
-          @@session[token]['count visit']+=1
-        end
+  def call(env)
+    token=env['HTTP_COOKIE'] #проверка токена    
+    unless token         #если пусто генерируем
+      token = generate_token
+      @@session[token]=' ' 
+      c,h,b=@nextapp.call(env)
+      h['Session']=@@session[token]
+      h['Set-Cookie']='token='+token+'; path=/;'
+      [c,h,b]   
+    else 
+      token=token.split('=').last
+      unless @@session[token]
+        @@session[token]=' '
       end
+      delet(token)
+      env['Session']=@@session[token]
+      @nextapp.call(env)   
     end
-env['session']='Last visit->'+@@session[token]['last visit'].to_s+' count visit->'+@@session[token]['count visit'].to_s
-@@session[token]['last visit']=Time.now
-@nextapp.call(env)
   end
   private
   def generate_token
     SecureRandom.hex
+  end
+  def delet(id)
+    if @@session[id]
+      del=@@session[id].split(',')
+      if del.detect{|e| e=='delet'}
+        @@session[id]=' '
+      end
+    end
   end
 end  
