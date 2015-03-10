@@ -40,8 +40,8 @@ class Controller
     @_params = (@request.params.merge(@env['url_params'] || {}))
   end
 
-  def session
-    @env['rack.Session.data']
+  def session(k='Session')
+    @env[k]
   end
 end 
     

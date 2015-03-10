@@ -4,7 +4,7 @@ class OrderController < Controller
   @@layout='view/layout.html.erb'
 
   def index
-    product = @env['Session']
+    product = session
     if product
       @prod=product.split(',')
     else
@@ -17,9 +17,9 @@ class OrderController < Controller
     render('view/orders',@@layout)
   end
   def accepted
-    Order.new.add(@env['Session'],params['order'],params['adres'],params['sub'])
-    @env['Session'] << 'delet,'
-    @text = @env.to_s
+    Order.new.add(session,params['order'],params['adres'],params['sub'])
+    session << 'delet,'
+    @text = 'order accepted'
     render('view/orders',@@layout)
   end
 end

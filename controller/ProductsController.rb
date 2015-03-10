@@ -8,7 +8,7 @@ class ProductsController < Controller
     render('view/product',@@layout)
   end
   def show
-    prod = Product.find(@env['name'])
+    prod = Product.find(session('name'))
     @product={'name'=>prod.name,'price'=>prod.price,'img'=>prod.img,'info'=>prod.info}
     render('view/product1',@@layout)
   end

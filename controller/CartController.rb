@@ -3,7 +3,7 @@ require_relative 'controler.rb'
 class CartController < Controller
   @@layout='view/layout.html.erb'
   def index
-    products=@env['Session']
+    products=session
     if products!=' '
       @prod=products.split(',')     
     else

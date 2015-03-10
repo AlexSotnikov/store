@@ -11,7 +11,7 @@ class MyStore
           when '/order'
             env['controller']=OrderController
             env['action']='accepted'     
-          when '/'
+          when ('/')
             unless env['Session']
               env['Session']=product['name']+'='+product['price']+','
             else
