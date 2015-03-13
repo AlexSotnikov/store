@@ -3,10 +3,6 @@ class Controller
 
   attr_accessor :headers
 
-  def self.layout(layout = nil)
-    layout ? @@layout = layout : @@layout
-  end
-
   def initialize
     @response = Rack::Response.new
     @headers = {'Content-type' => 'text/html'}
@@ -41,7 +37,11 @@ class Controller
   end
 
   def session(k='Session')
-    @env[k]
+    unless block_given?
+      @env[k]
+    else
+      @env[k] << yield
+    end
   end
 end 
     

@@ -4,10 +4,10 @@ require_relative '../controller/ProductsController'
 describe ProductsController do
 
   it "index" do
-    expect(ProductsController.new.index).to eq(is_a?(String))
+    expect(ProductsController.new.index)
   end
   it "show" do
-    expect(ProductsController.new.show).to eq(is_a?(String))
+    expect(ProductsController.new.show)
   end
     
 end
